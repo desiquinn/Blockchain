@@ -54,6 +54,8 @@ class Blockchain(object):
     def hash(self, block):
         """
         Creates a SHA-256 hash of a Block
+        We do this next because to make any chain besides the 1st chain
+        we need to hash the previous block.
 
         :param block": <dict> Block
         "return": <str>
@@ -68,8 +70,12 @@ class Blockchain(object):
         # or we'll have inconsistent hashes
 
         # TODO: Create the block_string
+        string_object = json.dumps(block, sort_keys=True)
+        block_string = string_object.encode()
 
         # TODO: Hash this string using sha256
+        raw_hash = hashlib.sha256(block_string)
+        hex_hash = raw_hash.hexdigest()
 
         # By itself, the sha256 function returns the hash in a raw string
         # that will likely include escaped characters.
@@ -78,7 +84,8 @@ class Blockchain(object):
         # easier to work with and understand
 
         # TODO: Return the hashed block string in hexadecimal format
-        pass
+        return hex_hash
+
     # decorator make the function a property
     @property
     def last_block(self):
@@ -123,6 +130,7 @@ node_identifier = str(uuid4()).replace('-', '')
 # Instantiate the Blockchain
 blockchain = Blockchain()
 print(blockchain.chain)
+print(blockchain.hash(blockchain.last_block))
 
 @app.route('/mine', methods=['GET'])
 def mine():

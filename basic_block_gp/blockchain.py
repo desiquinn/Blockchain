@@ -4,16 +4,21 @@ from time import time
 from uuid import uuid4
 
 from flask import Flask, jsonify, request
-
+# Google flask documentation - allow you to build api, routes, etc
+# decide how much you need to learn about flask
+# go back and fourth between the code and docs and learn what's in 
+# the docs and hot to solve the problem.
 
 class Blockchain(object):
     def __init__(self):
         self.chain = []
         self.current_transactions = []
 
-        # Create the genesis block
+        # Create the genesis block - the start/initial block
         self.new_block(previous_hash=1, proof=100)
-
+        # 1 is in previous_hash as a placeholder and the first block
+        # doesn't have a previous hash.  This is good because we know
+        # it's not a real hash (clearly different)
     def new_block(self, proof, previous_hash=None):
         """
         Create a new Block in the Blockchain
@@ -35,7 +40,7 @@ class Blockchain(object):
         }
 
         # Reset the current list of transactions
-        # Append the chain to the block
+        # Append the block to the chain
         # Return the new block
         pass
 
@@ -67,7 +72,7 @@ class Blockchain(object):
 
         # TODO: Return the hashed block string in hexadecimal format
         pass
-
+    # decorator make the function a property
     @property
     def last_block(self):
         return self.chain[-1]
@@ -83,7 +88,8 @@ class Blockchain(object):
         # TODO
         pass
         # return proof
-
+        
+    # can run the function without an instance, don't need to substantiate a blockchain to call valid proof
     @staticmethod
     def valid_proof(block_string, proof):
         """

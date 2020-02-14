@@ -161,14 +161,14 @@ def mine():
 
             response = {
                 'new_block': new_block,
-                'message': 'You found a new block'
+                'message': 'New Block Forged'
             }
 
             return jsonify(response), 200
 
         else:
             response = {
-                'data': data
+                'data': data,
                 'message': f'block found, but not new'
             }
             return jsonify(response), 200

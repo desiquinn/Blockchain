@@ -125,6 +125,7 @@ def mine():
 
     response = {
         # TODO: Send a JSON response with the new block
+        "message": "Hello world!"
     }
 
     return jsonify(response), 200
@@ -134,6 +135,7 @@ def mine():
 def full_chain():
     response = {
         # TODO: Return the chain and its current length
+        "message": "Hello world!"
     }
     return jsonify(response), 200
 
